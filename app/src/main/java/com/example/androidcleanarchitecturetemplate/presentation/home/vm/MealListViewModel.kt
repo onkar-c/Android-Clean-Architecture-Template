@@ -2,7 +2,7 @@ package com.example.androidcleanarchitecturetemplate.presentation.home.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.androidcleanarchitecturetemplate.domain.repository.MealRepository
+import com.example.domain.repository.MealRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

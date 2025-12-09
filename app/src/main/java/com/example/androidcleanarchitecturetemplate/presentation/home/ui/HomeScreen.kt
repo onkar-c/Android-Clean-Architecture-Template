@@ -13,13 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.androidcleanarchitecturetemplate.App
-import com.example.androidcleanarchitecturetemplate.domain.model.Meal
+import com.example.domain.model.Meal
 
 import com.example.androidcleanarchitecturetemplate.presentation.home.vm.MealListUiState
 import com.example.androidcleanarchitecturetemplate.presentation.home.vm.MealListViewModel

@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "Android Clean Architecture Template"
 include(":app")
 
+include(":domain")
+include(":data")

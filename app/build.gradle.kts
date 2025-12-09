@@ -89,18 +89,10 @@ dependencies {
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.androidx.room.compiler)
-
-
-
-    // Retrofit + OkHttp + Moshi
-    implementation(libs.retrofit)
     implementation(libs.converter.moshi)
-    implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
-    implementation(libs.moshi.kotlin)
+
+
+    implementation(project(":domain"))
+    implementation(project(":data"))
 }

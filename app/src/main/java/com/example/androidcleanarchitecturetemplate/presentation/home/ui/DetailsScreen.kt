@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.androidcleanarchitecturetemplate.App
-import com.example.androidcleanarchitecturetemplate.domain.model.Meal
+import com.example.domain.model.Meal
 import kotlinx.coroutines.launch
 
 @Composable

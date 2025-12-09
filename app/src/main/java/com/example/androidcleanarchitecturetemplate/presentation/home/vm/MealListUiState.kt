@@ -1,6 +1,6 @@
 package com.example.androidcleanarchitecturetemplate.presentation.home.vm
 
-import com.example.androidcleanarchitecturetemplate.domain.model.Meal
+import com.example.domain.model.Meal
 
 data class MealListUiState(
     val isLoading: Boolean = false,
