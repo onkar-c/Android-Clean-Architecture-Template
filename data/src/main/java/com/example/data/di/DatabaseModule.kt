@@ -2,6 +2,7 @@ package com.example.data.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.data.BuildConfig
 import com.example.data.local.AppDatabase
 import com.example.data.local.MealDao
 import dagger.Module
@@ -19,7 +20,7 @@ object DatabaseModule {
         Room.databaseBuilder(
             application,
             AppDatabase::class.java,
-            "android_clean_template.db"
+            BuildConfig.DB_NAME
         ).build()
 
     @Provides

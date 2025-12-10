@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import com.example.data.BuildConfig
 import com.example.data.remote.MealApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -13,8 +14,6 @@ import javax.inject.Singleton
 
 @Module
 object NetworkModule {
-
-    private const val BASE_URL = "https://www.themealdb.com/api/json/v1/1/"
 
     @Provides
     @Singleton
@@ -46,7 +45,7 @@ object NetworkModule {
         moshi: Moshi
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()

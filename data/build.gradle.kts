@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -16,20 +18,67 @@ android {
     }
 
     buildTypes {
-        release {
+
+        debug {
             isMinifyEnabled = false
+        }
+
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+
+    buildFeatures {
+        buildConfig = true
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    flavorDimensions += "env"
+
+    productFlavors {
+        create("dev") {
+            dimension = "env"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://www.themealdb.com/api/json/v1/1/\""
+            )
+            buildConfigField(
+                "String",
+                "DB_NAME",
+                "\"meals_dev.db\""
+            )
+        }
+        create("prod") {
+            dimension = "env"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://www.themealdb.com/api/json/v1/1/\""
+            )
+            buildConfigField(
+                "String",
+                "DB_NAME",
+                "\"meals_prod.db\""
+            )
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            javaParameters.set(true)
+        }
     }
 }
 
