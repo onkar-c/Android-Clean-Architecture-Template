@@ -21,7 +21,9 @@ object DatabaseModule {
             application,
             AppDatabase::class.java,
             BuildConfig.DB_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration(false)
+            .build()
 
     @Provides
     @Singleton

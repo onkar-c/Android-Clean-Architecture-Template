@@ -4,6 +4,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.StarBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,7 +23,6 @@ import com.example.domain.model.Meal
 
 import com.example.androidcleanarchitecturetemplate.presentation.home.vm.MealListUiState
 import com.example.androidcleanarchitecturetemplate.presentation.home.vm.MealListViewModel
-import com.example.data.BuildConfig
 
 
 @Composable
@@ -30,12 +33,9 @@ fun HomeRoute(
     val viewModel: MealListViewModel = viewModel(factory = viewModelFactory)
     val state by viewModel.uiState.collectAsState()
 
-    // "dev" / "prod" from product flavors
-    val envLabel = remember { BuildConfig.FLAVOR.uppercase() }
 
     HomeScreen(
         state = state,
-        envLabel = envLabel,
         onRefresh = { viewModel.refreshMeals() },
         onMealClick = { id -> onNavigateToDetails(id) },
         onToggleFavorite = { id -> viewModel.onFavoriteClick(id) }
@@ -46,7 +46,6 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     state: MealListUiState,
-    envLabel: String,
     onRefresh: () -> Unit,
     onMealClick: (String) -> Unit,
     onToggleFavorite: (String) -> Unit
@@ -67,10 +66,15 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    AssistChip(
-                        onClick = { /* no-op */ },
-                        label = { Text(envLabel) }
-                    )
+
+                    IconButton(onClick = onRefresh) {
+                        Icon(
+                            imageVector =  Icons.Default.Refresh,
+                            contentDescription = "Refresh",
+                            tint = MaterialTheme.colorScheme.primary
+
+                        )
+                    }
                 }
             )
         }
@@ -189,17 +193,18 @@ fun MealItem(
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.SemiBold
                 )
-                Text(
-                    text = if (meal.isFavorite) "★ Favorite" else "☆ Not favorite",
-                    style = MaterialTheme.typography.bodySmall
-                )
             }
 
-            FilledTonalButton(
-                onClick = onToggleFavorite,
-                contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp)
-            ) {
-                Text(if (meal.isFavorite) "Un-favourite" else "Fav")
+            IconButton(onClick = onToggleFavorite) {
+                Icon(
+                    imageVector = if (meal.isFavorite) Icons.Filled.Star else Icons.Outlined.StarBorder,
+                    contentDescription = if (meal.isFavorite) "Remove from favorites" else "Add to favorites",
+                    tint = if (meal.isFavorite) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        MaterialTheme.colorScheme.outline
+                    }
+                )
             }
         }
     }

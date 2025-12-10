@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,11 +27,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            MaterialTheme {
+            AndroidCleanArchitectureTemplateTheme {
                 Surface {
                     val navController = rememberNavController()
-                    AppNavGraph(navController = navController,
-                        viewModelFactory = viewModelFactory)
+                    AppNavGraph(
+                        navController = navController,
+                        viewModelFactory = viewModelFactory
+                    )
                 }
             }
         }
